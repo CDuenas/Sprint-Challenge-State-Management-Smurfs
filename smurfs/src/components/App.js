@@ -1,13 +1,35 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+import Smurf from './Smurf';
 import "./App.css";
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      smurfs: [{}]
+    };
+  }
+
+  componentDidMount(){
+    axios
+      .get("http://localhost:3333/smurfs")
+      .then(res => this.setState({ smurfs:res.data }))
+      .catch(err => {console.log("error: ", err)})
+  }
   render() {
     return (
       <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+        {this.state.smurfs.map(smurf => {
+          return (
+            <Smurf 
+              key={smurf.id}
+              name={smurf.name}
+              age={smurf.age}
+              height={smurf.height}
+            />
+          );
+        })}
       </div>
     );
   }
