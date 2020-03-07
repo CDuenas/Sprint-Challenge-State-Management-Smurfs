@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Smurf from './Smurf';
+import SmurfForm from './SmurfForm';
 import "./App.css";
 class App extends Component {
   constructor(){
@@ -30,6 +31,7 @@ class App extends Component {
             />
           );
         })}
+        <SmurfForm />
       </div>
     );
   }
